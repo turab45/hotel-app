@@ -44,25 +44,25 @@ public class HotelServiceImpl implements HotelService{
 	@Override
 	public List<HotelEntity> getHotelsByCity(String city) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hotelRepository.findByAddressCity(city);
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByMenu(String menu) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hotelRepository.getHotelsByMenu(menu);
 	}
 
 	@Override
-	public List<HotelEntity> getHotelsByPartnerName(String partnerName) {
+	public List<HotelEntity> getHotelsByDelivery(String partnerName) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hotelRepository.getHotelsByDelivery(partnerName);
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByLocation(String street) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hotelRepository.findByAddressStreet(street);
 	}
 
 	@Override

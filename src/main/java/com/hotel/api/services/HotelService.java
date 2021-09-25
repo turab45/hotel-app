@@ -12,7 +12,7 @@ public interface HotelService {
 	
 	public List<HotelEntity> getHotelsByCity(String city);
 	public List<HotelEntity> getHotelsByMenu(String menu);
-	public List<HotelEntity> getHotelsByPartnerName(String partnerName);
+	public List<HotelEntity> getHotelsByDelivery(String partnerName);
 	public List<HotelEntity> getHotelsByLocation(String street);
 	public List<HotelEntity> getHotelsByLocationAndMenu(String location, String menu);
 }
