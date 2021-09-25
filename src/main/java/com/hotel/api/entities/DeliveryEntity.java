@@ -14,15 +14,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name="deliveries")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class DeliveryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +29,63 @@ public class DeliveryEntity {
 	private double charges;
 	@ManyToMany(mappedBy = "delivery")
 	private Set<HotelEntity> hotels;
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+	public String getPartnerName() {
+		return partnerName;
+	}
+
+
+
+	public void setPartnerName(String partnerName) {
+		this.partnerName = partnerName;
+	}
+
+
+
+	public double getCharges() {
+		return charges;
+	}
+
+
+
+	public void setCharges(double charges) {
+		this.charges = charges;
+	}
+
+
+
+	public Set<HotelEntity> getHotels() {
+		return hotels;
+	}
+
+
+
+	public void setHotels(Set<HotelEntity> hotels) {
+		this.hotels = hotels;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "DeliveryEntity [id=" + id + ", partnerName=" + partnerName + ", charges=" + charges + ", hotels="
+				+ hotels + "]";
+	}
+	
+	
 	
 }
