@@ -26,6 +26,7 @@ public class AddressEntity {
 	@Column(name = "address_id")
 	private Integer id;
 	private String city;
+	private String street;
 	private String zipCode;
 	private String state;
 	
