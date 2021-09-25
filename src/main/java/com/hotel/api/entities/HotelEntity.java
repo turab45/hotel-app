@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -29,8 +32,11 @@ public class HotelEntity {
 	private Integer id;
 	
 	private String name;
+	@OneToOne
 	private AddressEntity address;
+	@OneToMany
 	private Set<MenuEntity> menuList;
+	@ManyToMany
 	private Set<DeliveryEntity> delivery;
 	
 	
