@@ -3,10 +3,11 @@ package com.hotel.api.services;
 import java.util.List;
 
 import com.hotel.api.entities.HotelEntity;
+import com.hotel.api.exceptions.HotelNotFoundException;
 
 public interface HotelService {
 	public HotelEntity addHotel(HotelEntity hotel);
-	public HotelEntity updateHotel(HotelEntity hotel);
+	public HotelEntity updateHotel(HotelEntity hotel) throws HotelNotFoundException;
 	public HotelEntity deleteHotel(Integer hotelId);
 	public HotelEntity getHotelById(Integer hotelId);
 	

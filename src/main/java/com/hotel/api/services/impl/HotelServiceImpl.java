@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.hotel.api.entities.HotelEntity;
 import com.hotel.api.entities.MenuEntity;
+import com.hotel.api.exceptions.HotelNotFoundException;
+import com.hotel.api.exceptions.IdNotFoundException;
 import com.hotel.api.repositories.HotelRepository;
 import com.hotel.api.repositories.MenuRepository;
 import com.hotel.api.services.HotelService;
@@ -44,39 +46,54 @@ public class HotelServiceImpl implements HotelService{
 	@Override
 	@Transactional
 	public HotelEntity deleteHotel(Integer hotelId) {
-		HotelEntity findById = this.hotelRepository.findById(hotelId).get();
-		this.hotelRepository.delete(findById);
-		return findById;
+		Optional<HotelEntity> hotel = this.hotelRepository.findById(hotelId);
+		if (hotel.isEmpty()) {
+			throw new IdNotFoundException("Hotel with id:"+hotelId+" not found");
+		}
+		this.hotelRepository.delete(hotel.get());
+		return hotel.get();
 	}
 
 	@Override
 	public HotelEntity getHotelById(Integer hotelId) {
-		HotelEntity hotel = this.hotelRepository.findById(hotelId).get();
-		return hotel;
+		return this.hotelRepository.findById(hotelId).orElseThrow(()->new IdNotFoundException("Id not found. Hotel with id: "+hotelId+" does not exist."));
+		
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByCity(String city) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.findByAddressCity(city);
+		List<HotelEntity> list = this.hotelRepository.findByAddressCity(city);
+		if (list.isEmpty()) {
+			throw new HotelNotFoundException("Hotels with city: "+city+" not found.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByMenu(String menu) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.getHotelsByMenu(menu);
+		List<HotelEntity> list = this.hotelRepository.getHotelsByMenu(menu);
+		if (list.isEmpty()) {
+			throw new HotelNotFoundException("Hotels with menu: "+menu+" not found.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByDelivery(String partnerName) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.getHotelsByDelivery(partnerName);
+		List<HotelEntity> list = this.hotelRepository.getHotelsByDelivery(partnerName);
+		if (list.isEmpty()) {
+			throw new HotelNotFoundException("Hotels with partner: "+partnerName+" not found.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<HotelEntity> getHotelsByLocation(String street) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.findByAddressStreet(street);
+		List<HotelEntity> list = this.hotelRepository.findByAddressStreet(street);
+		if (list.isEmpty()) {
+			throw new HotelNotFoundException("Hotels with address: "+street+" not found.");
+		}
+		return list;
 	}
 
 	@Override
