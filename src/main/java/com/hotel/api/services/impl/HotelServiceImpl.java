@@ -1,34 +1,48 @@
 package com.hotel.api.services.impl;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hotel.api.entities.HotelEntity;
+import com.hotel.api.entities.MenuEntity;
 import com.hotel.api.repositories.HotelRepository;
+import com.hotel.api.repositories.MenuRepository;
 import com.hotel.api.services.HotelService;
 
 @Service
+@Transactional
 public class HotelServiceImpl implements HotelService{
 	
 	@Autowired
 	private HotelRepository hotelRepository;
+	@Autowired
+	private MenuRepository menuRepository;
 
 	@Override
+	@Transactional
 	public HotelEntity addHotel(HotelEntity hotel) {
+		for(MenuEntity menuEntity: hotel.getMenuList())
+			this.menuRepository.save(menuEntity);
+		
 		HotelEntity hotelEntity = this.hotelRepository.save(hotel);
 		return hotelEntity;
 	}
 
 	@Override
+	@Transactional
 	public HotelEntity updateHotel(HotelEntity hotel) {
 		HotelEntity hotelEntity = this.hotelRepository.save(hotel);
 		return hotelEntity;
 	}
 
 	@Override
+	@Transactional
 	public HotelEntity deleteHotel(Integer hotelId) {
 		HotelEntity findById = this.hotelRepository.findById(hotelId).get();
 		this.hotelRepository.delete(findById);

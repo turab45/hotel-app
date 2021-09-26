@@ -1,5 +1,6 @@
 package com.hotel.api.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +31,7 @@ public class MenuEntity {
 	private Float price;
 	@ManyToOne
 	@JoinColumn(name = "hotel_id")
+	@JsonIgnore
 	private HotelEntity hotel;
 	
 	

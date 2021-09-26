@@ -34,10 +34,10 @@ public class HotelEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private AddressEntity address;
-	@OneToMany
+	@OneToMany(orphanRemoval = true)
 	@JoinColumn(name = "hotel_id")
 	private Set<MenuEntity> menuList;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "hotel_delivery", joinColumns = @JoinColumn(name="hotel_id"),inverseJoinColumns = @JoinColumn(name="delivery_id"))
 	private Set<DeliveryEntity> delivery;
 	

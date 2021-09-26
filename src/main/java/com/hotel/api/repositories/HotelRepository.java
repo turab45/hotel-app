@@ -20,6 +20,6 @@ public interface HotelRepository extends JpaRepository<HotelEntity, Integer>{
 	@Query("FROM HotelEntity h INNER JOIN h.delivery hd WHERE hd.partnerName=?1")
 	List<HotelEntity> getHotelsByDelivery(String delivery);
 	
-	@Query("FROM HotelEntity h INNER JOIN h.address a ON h.menuList mn WHERE a.street=?1 AND mn.name=?2")
-	List<HotelEntity> getHotelsByLocationAndMenu(String location, String menu);
+//	@Query("FROM HotelEntity h INNER JOIN h.address a ON h.menuList mn WHERE a.street=?1 AND mn.name=?2")
+//	List<HotelEntity> getHotelsByLocationAndMenu(String location, String menu);
 }
